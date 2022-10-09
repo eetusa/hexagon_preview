@@ -6,8 +6,8 @@ class HexGrid{
         this.grid_height = 10;
         this.x_offset = 0;
         this.y_offset = 0;
-        this.start_x = 400;
-        this.start_y = 200;
+        this.start_x = 150;
+        this.start_y = 380;
         this.c = Math.cos(0.523598776) * (this.side_length*2);
         this.init();
         this.selected = [];

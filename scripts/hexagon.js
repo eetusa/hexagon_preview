@@ -96,7 +96,8 @@ class Hexagon{
         //console.log(this.text.length)
         if (this.text.length > 0){
             c.font = "20px Arial";
-            c.fillText(this.text, this.x + this._c + 30, this.y);
+           // c.fillText(this.text, this.x + this._c + 30, this.y);
+           c.fillText(this.text, this.x, this.y + this.a*2 + 30);
         }
     }
 

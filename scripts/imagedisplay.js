@@ -11,8 +11,9 @@ class ImageDisplay{
 
     init(){
         for (let i = 0; i < this.images.length; i++){
-            let x = this.start_x;
-            let y = this.start_y + i*this._c*2 + 30;
+            let x = this.start_x + i*this.side_length*4+50;
+           // let y = this.start_y + i*this._c*2 + 30;
+            let y = this.start_y;
             this.grid.push(new Hexagon(x, y, this.side_length, "red"));
             this.grid[i].changeImage(this.images[i]);
             this.grid[i].text = "" + (i+1);
