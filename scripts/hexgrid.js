@@ -109,6 +109,23 @@ class HexGrid{
         }
     }
 
+    getRandomInt(max) {
+        return Math.floor(Math.random() * max);
+    }
+
+
+
+    setSelectedRandom(images){
+        for (let i = 0; i < this.grid.length; i++){
+            for (let j = 0; j < this.grid[i].length; j++){
+                if (this.grid[i][j].selected){
+                    let random = this.getRandomInt(images.length)
+                    this.grid[i][j].changeImage(images[random]);
+                }
+            }
+        }
+    }
+
     setSelectedImage(image){
         for (let i = 0; i < this.grid.length; i++){
             for (let j = 0; j < this.grid[i].length; j++){

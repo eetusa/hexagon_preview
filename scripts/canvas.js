@@ -53,6 +53,20 @@ function init(){
         }
     });
 
+    // addEventListener('down', function(e){
+    //     if (e.keyCode == 69){
+    //         console.log("random")
+    //         console.log("random")
+    //       //  hexgrid.setSelectedRandom(imageloader.getImages())
+    //     }
+    // })
+
+    addEventListener('keyup', function(e){
+        if (e.keyCode == 82){
+            hexgrid.setSelectedRandom(imageloader.getImages())
+        }
+    })
+
     addEventListener('click', function(e){
         hexgrid.selectHexagon(mouse.x, mouse.y);
     })
@@ -89,6 +103,13 @@ function init(){
             if (ctrl){
                 hexgrid.selectAll();
             }
+        }
+    })
+
+    addEventListener('down', function(e){
+        if (e.keyCode == 82){
+            console.log("random")
+          //  hexgrid.setSelectedRandom(imageloader.getImages())
         }
     })
 
