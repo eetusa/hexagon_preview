@@ -68,7 +68,12 @@ function init(){
     })
 
     addEventListener('click', function(e){
-        hexgrid.selectHexagon(mouse.x, mouse.y);
+        let imd = imagedisplay.selectHexagon(mouse.x, mouse.y);
+        if (imd){
+            hexgrid.setSelectedImage(imd)
+        } else{
+            hexgrid.selectHexagon(mouse.x, mouse.y);
+        }
     })
 
     addEventListener('keydown', function(e){

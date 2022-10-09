@@ -44,4 +44,24 @@ class ImageDisplay{
         })
     }
 
+    distance(fromX, fromY, toX, toY){
+        return Math.sqrt(Math.pow(fromX - toX, 2) + Math.pow(fromY - toY, 2));
+    }
+
+    selectHexagon(x, y){
+        let closest = {ii: -1};
+        let closest_d = 999999;
+
+        for (let i = 0; i < this.grid.length; i++){
+                let d = this.distance(x, y, this.grid[i].x, this.grid[i].y);
+                if (d < closest_d){
+                    closest_d = d;
+                    closest = {ii: i};
+                }
+        }
+        if (closest_d < 2*this.side_length){
+            return this.images[closest.ii];
+        } 
+    }
+
 }
