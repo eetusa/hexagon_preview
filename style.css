@@ -6,11 +6,9 @@ html,body{
 }
 #wrapper{
     margin: 0 auto;
-    width: 80vw;
+    width: 100wh;
     height: 80vh;
 }
 #canvas{
-    margin: 0 auto;
-    width: 100%;
-    height: 100%;
+
 }
