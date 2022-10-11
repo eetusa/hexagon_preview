@@ -11,14 +11,14 @@ class ImageLoader{
             
             img.src = url;
             
-            console.log(img)
+          //  console.log(img)
 
             // if (img.width === 0){
             //     break;
             // }
             this.images.push(url)
         }
-        console.log(this.images)
+       // console.log(this.images)
     }
 
     getImages(){

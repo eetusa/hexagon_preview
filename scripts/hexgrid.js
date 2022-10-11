@@ -42,9 +42,6 @@ class HexGrid{
                         if (temp_grid.length === 0) continue;
 
                         if ( (new_grid.length <= temp_grid.length) && new_grid[i].length <= temp_grid[i].length){
-                            console.log("ye")
-                            console.log(JSON.parse(JSON.stringify(new_grid)))
-                            console.log("i: " + i + ", j: " + j)
                             new_grid[i][new_grid[i].length-1].img.src = temp_grid[i][new_grid[i].length-1].img.src
                         } 
                     }
@@ -57,9 +54,6 @@ class HexGrid{
                         if (temp_grid.length === 0) continue;
 
                         if ( (new_grid.length <= temp_grid.length) && new_grid[i].length <= temp_grid[i].length){
-                            console.log("ye")
-                            console.log(JSON.parse(JSON.stringify(new_grid)))
-                            console.log("i: " + i + ", j: " + j)
                             new_grid[i][new_grid[i].length-1].img.src = temp_grid[i][new_grid[i].length-1].img.src
                         } 
                     }
@@ -146,7 +140,6 @@ class HexGrid{
 
 
     setSelectedRandom(images, random_array){
-        console.log(random_array);
         let temp = [];
         for (let i = 0; i < random_array.length; i++){
             if (random_array[i]){

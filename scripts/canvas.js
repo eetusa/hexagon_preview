@@ -16,11 +16,7 @@ let mouse = {
 
 
 // Eventlisteners
-
 addEventListener("mousemove", function(event){
-
-    // mouse.x = event.clientX;
-    // mouse.y = event.clientY;
     let a = getMousePos(canvas, event);
     mouse.x = a.x;
     mouse.y = a.y;
@@ -82,22 +78,18 @@ function init(){
         
     })
 
-
-    // hexagons.push(new Hexagon(mouse.x,mouse.y,50,"yellow"));
-    addEventListener('keyup', function(e){
-        if (e.keyCode==69){
-            // hexagons.push(new Hexagon(mouse.x,mouse.y,50,"red"));
-            
+    addEventListener('keydown', (e) =>{
+        if (e.key === 'Enter'){
+            let row_count = matrix_form[0].value;
+            let col_count = matrix_form[1].value;
+            let side_len = matrix_form[2].value;
+    
+            if (isPositiveInteger(row_count) && isPositiveInteger(col_count) && isPositiveInteger(side_len)){
+                hexgrid.changeRowAndColCount(row_count, col_count, side_len);
+            }
         }
-    });
+    })
 
-    // addEventListener('down', function(e){
-    //     if (e.keyCode == 69){
-    //         console.log("random")
-    //         console.log("random")
-    //       //  hexgrid.setSelectedRandom(imageloader.getImages())
-    //     }
-    // })
 
     addEventListener('keyup', function(e){
         if (e.keyCode == 82){
@@ -122,15 +114,12 @@ function init(){
     addEventListener('keydown', function(e){
         if (e.keyCode == 16){
             select_many = true;
-           // console.log(select_many)
         }
     })
 
     addEventListener('keyup', function(e){
         if (e.keyCode == 16){
             select_many = false;
-          //  console.log(select_many)
-
         }
     })
 
@@ -154,12 +143,6 @@ function init(){
         }
     })
 
-    addEventListener('down', function(e){
-        if (e.keyCode == 82){
-            console.log("random")
-          //  hexgrid.setSelectedRandom(imageloader.getImages())
-        }
-    })
 
     addEventListener('keydown', function(e){{
         switch(e.keyCode){
