@@ -2,18 +2,29 @@ class HexGrid{
     constructor(side_length){
         this.side_length = side_length;
         this.grid = [];
-        this.grid_width = 10;
-        this.grid_height = 10;
+        this.grid_width = 8;
+        this.grid_height = 8;
         this.x_offset = 0;
         this.y_offset = 0;
-        this.start_x = 150;
-        this.start_y = 380;
+        this.start_x = 380;
+        this.start_y = 100;
         this.c = Math.cos(0.523598776) * (this.side_length*2);
-        this.init();
         this.selected = [];
+        this.init();
+        matrix_form[0].value = this.grid_height;
+        matrix_form[1].value = this.grid_width;
+        matrix_form[2].value = this.side_length;
+
     }
 
     init(){
+        //let temp_grid = [...this.grid];
+        this.grid.length = 0;
+        // while(this.grid.length > 0){
+        //     this.grid.pop();
+        // }
+        this.selected.length = 0;
+
         for (let i = 0; i < this.grid_height; i++){
             this.grid.push([]);
             for (let j = 0; j < this.grid_width; j++){
@@ -22,13 +33,21 @@ class HexGrid{
                     if (j % 2 === 0){
                         let x = this.start_x + (3*j)*this.side_length;
                         let y = this.start_y + (i)*this.c;
-                         this.grid[i].push(new Hexagon(x, y, this.side_length, "red"));
+                        this.grid[i].push(new Hexagon(x, y, this.side_length, "red"));
+                        // if (i < temp_grid.length && i < temp_grid[i].length < j){
+                        //     console.log("ye")
+                        //     this.grid[i][this.grid[i].length-1].img.src = temp_grid[i][j].img.src
+                        // }
                     }
                 } else {
                     if (j % 2 === 0){
                         let x = this.start_x + 3*this.side_length + (3*j)*this.side_length;
                         let y = this.start_y +this.c + (i-1)*this.c;
                         this.grid[i].push(new Hexagon(x, y, this.side_length, "red"));
+                        // if (i < temp_grid.length && i < temp_grid[i].length < j){
+                        //     console.log("ye2")
+                        //     this.grid[i][this.grid[i].length-1].img.src = temp_grid[i][j].img.src
+                        // }
                     }
                 }
             }
@@ -66,16 +85,11 @@ class HexGrid{
             if (!select_many){
                 this.deselectAll();
             }
-          //  this.setSelected()
             if (this.grid[closest.ii][closest.jj].selected && select_many){
                 this.grid[closest.ii][closest.jj].selected = false;
             } else {
                 this.grid[closest.ii][closest.jj].selected = true;
             }
-            // console.log(this.selected)
-            // console.log(this.grid[this.selected.i][this.selected.j])
-           // this.grid[this.selected.i][this.selected.j].changeImage("images/test2.png");
-            
         } else{
             if (!select_many) this.deselectAll();
         }
@@ -115,11 +129,21 @@ class HexGrid{
 
 
 
-    setSelectedRandom(images){
+    setSelectedRandom(images, random_array){
+        console.log(random_array);
+        let temp = [];
+        for (let i = 0; i < random_array.length; i++){
+            if (random_array[i]){
+                temp.push(i);
+            }
+        }
+
+
         for (let i = 0; i < this.grid.length; i++){
             for (let j = 0; j < this.grid[i].length; j++){
                 if (this.grid[i][j].selected){
-                    let random = this.getRandomInt(images.length)
+                    let random = temp[this.getRandomInt(temp.length)];
+            
                     this.grid[i][j].changeImage(images[random]);
                 }
             }
@@ -135,5 +159,14 @@ class HexGrid{
             }
         }
         
+    }
+
+    changeRowAndColCount(row_count, col_count, side_len){
+        this.grid_height = row_count;
+        this.grid_width = col_count;
+        this.side_length = parseInt(side_len);
+        this.c = Math.cos(0.523598776) * (this.side_length*2);
+        
+        this.init();
     }
 }

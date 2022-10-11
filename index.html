@@ -4,19 +4,41 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
 
-    <title>Canvas template</title>
+    <title>Hexagenator</title>
 
     <meta name="description" content="">
     <meta name="author" content="">
     <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
     <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" href="">
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+
+
 
 </head>
 <body>
     <div id="wrapper">
         <canvas id="canvas"></canvas>
     </div>
+    <div>
+        <form id="matrix_setup">
+            <label for="rowcount">Rivien määrä:</label>
+            <input type="number" id="rowcount" name="rowcount"><br><br>
+            <label for="columncount">Kolumnien määrä:</label>
+            <input type="number" id="columncount" name="columncount"><br><br>
+            <label for="sidelen">Kuusiokulmioiden koko:</label>
+            <input type="number" id="sidelen" name="sidelen"><br><br>
+            <input type="button" id="matrixbutton" value="Vaihda">
+        </form> 
+    </div>
+   
     <script src="scripts/imageloader.js"></script>
     <script src="scripts/imagedisplay.js"></script>
     <script src="scripts/hexagon.js"></script>

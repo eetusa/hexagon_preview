@@ -24,6 +24,11 @@ class Hexagon{
         //this.scale = (2*this._c / this.img.height)
     }
 
+    changeSideLen(side_len){
+        this.a = side_len;
+        this._c = Math.cos(0.523598776) * (this.a*2);
+    }
+
     setVertices(){
         this.vertices = []
 
@@ -61,7 +66,7 @@ class Hexagon{
         c.globalAlpha = 1;
     }
 
-    drawImageWithMask(){
+    drawImageWithMask(randOn = true){
         
         c.save()
         c.beginPath();
@@ -95,9 +100,46 @@ class Hexagon{
         }
         //console.log(this.text.length)
         if (this.text.length > 0){
-            c.font = "20px Arial";
+            let textx = this.x-13;
+            let texty = this.y+10;
+            c.fillStyle = "#000000"
+            c.font = "40px Arial";
+            let bg = "█"
+            bg = bg.repeat(this.text.length);
+            c.fillText(bg, textx, texty);
+            c.fillStyle = "#FFFFFF"
            // c.fillText(this.text, this.x + this._c + 30, this.y);
-           c.fillText(this.text, this.x, this.y + this.a*2 + 30);
+        //   c.fillText(this.text, this.x, this.y + this.a*2 + 30);
+            c.fillText(this.text, textx+3, texty);
+        }
+
+        if (!randOn){
+        //     let textx = this.x-10;
+        //     let texty = this.y+10;
+        //     c.fillStyle = "#000000"
+        //     c.font = "40px Arial";
+        //     let bg = "█"
+        //     bg = bg.repeat(this.text.length);
+        //     c.fillText(bg, textx, texty);
+        //     c.fillStyle = "#FFFFFF"
+        //    // c.fillText(this.text, this.x + this._c + 30, this.y);
+        // //   c.fillText(this.text, this.x, this.y + this.a*2 + 30);
+        //     c.fillText("MORO", textx+3, texty);
+            c.strokeStyle = "red";
+            c.beginPath();
+            c.lineWidth = 6;
+            c.moveTo(this.x-10, this.y+30);
+            c.lineTo(this.x+10, this.y+50);
+            c.closePath()
+            c.stroke()
+
+            c.beginPath();
+            c.lineWidth = 6;
+            c.moveTo(this.x-10, this.y+50);
+            c.lineTo(this.x+10, this.y+30);
+            c.closePath()
+            c.stroke()
+
         }
     }
 

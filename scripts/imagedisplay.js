@@ -2,20 +2,27 @@ class ImageDisplay{
     constructor(images, side_length){
         this.images = images;
         this.grid = [];
-        this.start_x = 100;
+        this.start_x = 80;
         this.start_y = 100;
         this.side_length = side_length;
         this._c = Math.cos(0.523598776) * (this.side_length*2);
+        this.random_images = [];
         this.init();
     }
 
     init(){
         for (let i = 0; i < this.images.length; i++){
-            let x = this.start_x + i*this.side_length*4+50;
+          //  let x = this.start_x + i*this.side_length*4+50;
+          //  let x = this.start_x + i*this.side_length*3;
+            let x = this.start_x;
            // let y = this.start_y + i*this._c*2 + 30;
-            let y = this.start_y;
+            let y = this.start_y + this._c*i;
+            if (i%2 !== 0){
+                x += this.side_length*3;
+            }
             this.grid.push(new Hexagon(x, y, this.side_length, "red"));
             this.grid[i].changeImage(this.images[i]);
+            this.random_images.push(true);
             this.grid[i].text = "" + (i+1);
             // this.grid.push([]);
             // for (let j = 0; j < this.grid_width; j++){
@@ -39,9 +46,14 @@ class ImageDisplay{
     }
 
     update(){ 
-        this.grid.forEach(hex =>{
-            hex.drawImageWithMask()
-        })
+        for (let i = 0; i < this.grid.length; i++){
+            let hex = this.grid[i];
+            let random = this.random_images[i];
+            hex.drawImageWithMask(random);
+        }
+        // this.grid.forEach(hex =>{
+        //     hex.drawImageWithMask()
+        // })
     }
 
     distance(fromX, fromY, toX, toY){
@@ -60,8 +72,27 @@ class ImageDisplay{
                 }
         }
         if (closest_d < 2*this.side_length){
-            return this.images[closest.ii];
+            return {"image": this.images[closest.ii], "i": closest.ii};
         } 
     }
+
+    getRandomImages(){
+        return this.random_images;
+    }
+
+    addToRandomImages(i){
+        this.random_images[i] = true;
+    }
+
+    toggleRandomImage(i){
+        this.random_images[i] = !this.random_images[i];
+    }
+
+    deleteFromRandomImages(i){
+        console.log(this.random_images)
+        this.random_images[i] = false;
+        console.log(this.random_images)
+    }
+
 
 }

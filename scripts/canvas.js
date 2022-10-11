@@ -2,6 +2,8 @@
 
 const canvas = document.querySelector('canvas');
 const c = canvas.getContext('2d');
+const matrix_form = document.getElementById('matrix_setup')
+const matrix_button = document.getElementById('matrixbutton')
 
 canvas.width = innerWidth;
 canvas.height= innerHeight;
@@ -17,8 +19,11 @@ let mouse = {
 
 addEventListener("mousemove", function(event){
 
-    mouse.x = event.clientX;
-    mouse.y = event.clientY;
+    // mouse.x = event.clientX;
+    // mouse.y = event.clientY;
+    let a = getMousePos(canvas, event);
+    mouse.x = a.x;
+    mouse.y = a.y;
 });
 
 addEventListener("resize",function(){
@@ -28,22 +33,55 @@ addEventListener("resize",function(){
     init();
 });
 
+function isPositiveInteger(str) {
+    if (typeof str !== 'string') {
+      return false;
+    }
+  
+    const num = Number(str);
+  
+    if (Number.isInteger(num) && num > 0) {
+      return true;
+    }
+  
+    return false;
+}
 
+function getMousePos(canvas, evt) {
+    var rect = canvas.getBoundingClientRect(), // abs. size of element
+      scaleX = canvas.width / rect.width,    // relationship bitmap vs. element for x
+      scaleY = canvas.height / rect.height;  // relationship bitmap vs. element for y
+  
+    return {
+      x: (evt.clientX - rect.left) * scaleX,   // scale mouse coordinates after they have
+      y: (evt.clientY - rect.top) * scaleY     // been adjusted to be relative to element
+    }
+  }
 
 
 // Objects
 //let hexagon = new Hexagon(mouse.x,mouse.y,50,"red");
-let _SIDE_LENGTH = 50;
+let _SIDE_LENGTH = 40;
 let imageloader = new ImageLoader();
 let imagedisplay = new ImageDisplay(imageloader.getImages(), _SIDE_LENGTH);
 let hexgrid = new HexGrid(_SIDE_LENGTH);
 let select_many = false;
-let ctrl = false;
-
 
 
 
 function init(){
+
+    matrix_button.addEventListener('click', (e) => {
+        let row_count = matrix_form[0].value;
+        let col_count = matrix_form[1].value;
+        let side_len = matrix_form[2].value;
+
+        if (isPositiveInteger(row_count) && isPositiveInteger(col_count) && isPositiveInteger(side_len)){
+            hexgrid.changeRowAndColCount(row_count, col_count, side_len);
+        }
+        
+    })
+
 
     // hexagons.push(new Hexagon(mouse.x,mouse.y,50,"yellow"));
     addEventListener('keyup', function(e){
@@ -63,14 +101,19 @@ function init(){
 
     addEventListener('keyup', function(e){
         if (e.keyCode == 82){
-            hexgrid.setSelectedRandom(imageloader.getImages())
+            hexgrid.setSelectedRandom(imageloader.getImages(), imagedisplay.getRandomImages())
         }
     })
 
-    addEventListener('click', function(e){
+    canvas.addEventListener('click', function(e){
         let imd = imagedisplay.selectHexagon(mouse.x, mouse.y);
+        if (select_many && imd){
+            let i = imd.i;
+            imagedisplay.toggleRandomImage(i);
+        }
         if (imd){
-            hexgrid.setSelectedImage(imd)
+            if (!select_many)
+                hexgrid.setSelectedImage(imd.image)
         } else{
             hexgrid.selectHexagon(mouse.x, mouse.y);
         }
@@ -105,7 +148,7 @@ function init(){
 
     addEventListener('keyup', function(e){
         if (e.keyCode == 65){
-            if (ctrl){
+            if (select_many){
                 hexgrid.selectAll();
             }
         }
