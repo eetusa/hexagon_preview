@@ -5,10 +5,12 @@ const c = canvas.getContext('2d');
 const matrix_form = document.getElementById('matrix_setup')
 const matrix_button = document.getElementById('matrixbutton')
 
-canvas.width = window.innerWidth*0.95;
-canvas.height = window.innerHeight*0.80;
+var width_m = 1;
+var height_m = 0.8;
 
-// Variables
+canvas.width = window.innerWidth*width_m;
+canvas.height = window.innerHeight*height_m;
+
 let mouse = {
     x: 0,
     y: 0
@@ -23,8 +25,8 @@ addEventListener("mousemove", function(event){
 });
 
 addEventListener("resize",function(){
-    canvas.width = window.innerWidth*0.95;
-    canvas.height = window.innerHeight*0.80;
+    canvas.width = window.innerWidth*width_m;
+    canvas.height = window.innerHeight*height_m;
 });
 
 function isPositiveInteger(str) {
