@@ -18,40 +18,56 @@ class HexGrid{
     }
 
     init(){
-        //let temp_grid = [...this.grid];
+        let new_grid = [];
+        let temp_grid = [...this.grid];
         this.grid.length = 0;
+        this.grid = []
+
         // while(this.grid.length > 0){
         //     this.grid.pop();
         // }
         this.selected.length = 0;
 
         for (let i = 0; i < this.grid_height; i++){
-            this.grid.push([]);
+            new_grid.push([]);
             for (let j = 0; j < this.grid_width; j++){
 
                 if (i % 2 === 0){
                     if (j % 2 === 0){
                         let x = this.start_x + (3*j)*this.side_length;
                         let y = this.start_y + (i)*this.c;
-                        this.grid[i].push(new Hexagon(x, y, this.side_length, "red"));
-                        // if (i < temp_grid.length && i < temp_grid[i].length < j){
-                        //     console.log("ye")
-                        //     this.grid[i][this.grid[i].length-1].img.src = temp_grid[i][j].img.src
-                        // }
+                        new_grid[i].push(new Hexagon(x, y, this.side_length, "red"));
+                      //  console.log(JSON.parse(JSON.stringify(new_grid.length + " " + i)))
+
+                        if (temp_grid.length === 0) continue;
+
+                        if ( (new_grid.length <= temp_grid.length) && new_grid[i].length <= temp_grid[i].length){
+                            console.log("ye")
+                            console.log(JSON.parse(JSON.stringify(new_grid)))
+                            console.log("i: " + i + ", j: " + j)
+                            new_grid[i][new_grid[i].length-1].img.src = temp_grid[i][new_grid[i].length-1].img.src
+                        } 
                     }
                 } else {
                     if (j % 2 === 0){
                         let x = this.start_x + 3*this.side_length + (3*j)*this.side_length;
                         let y = this.start_y +this.c + (i-1)*this.c;
-                        this.grid[i].push(new Hexagon(x, y, this.side_length, "red"));
-                        // if (i < temp_grid.length && i < temp_grid[i].length < j){
-                        //     console.log("ye2")
-                        //     this.grid[i][this.grid[i].length-1].img.src = temp_grid[i][j].img.src
-                        // }
+                        new_grid[i].push(new Hexagon(x, y, this.side_length, "red"));
+
+                        if (temp_grid.length === 0) continue;
+
+                        if ( (new_grid.length <= temp_grid.length) && new_grid[i].length <= temp_grid[i].length){
+                            console.log("ye")
+                            console.log(JSON.parse(JSON.stringify(new_grid)))
+                            console.log("i: " + i + ", j: " + j)
+                            new_grid[i][new_grid[i].length-1].img.src = temp_grid[i][new_grid[i].length-1].img.src
+                        } 
                     }
                 }
             }
         }
+
+        this.grid = [...new_grid];
     }
 
     getGrid(){
