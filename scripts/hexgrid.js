@@ -26,12 +26,14 @@ class HexGrid{
         // while(this.grid.length > 0){
         //     this.grid.pop();
         // }
+        let odd_width = false;
         this.selected.length = 0;
-
+        if (this.grid_width % 2 !== 0){
+            odd_width = true;
+        }
         for (let i = 0; i < this.grid_height; i++){
             new_grid.push([]);
             for (let j = 0; j < this.grid_width; j++){
-
                 if (i % 2 === 0){
                     if (j % 2 === 0){
                         let x = this.start_x + (3*j)*this.side_length;
@@ -49,8 +51,13 @@ class HexGrid{
                     if (j % 2 === 0){
                         let x = this.start_x + 3*this.side_length + (3*j)*this.side_length;
                         let y = this.start_y +this.c + (i-1)*this.c;
+                        if (odd_width && j == this.grid_width -1){
+                            continue;
+                        }
                         new_grid[i].push(new Hexagon(x, y, this.side_length, "red"));
-
+                        if (odd_width && j == this.grid_width -1){
+                            continue;
+                        }
                         if (temp_grid.length === 0) continue;
 
                         if ( (new_grid.length <= temp_grid.length) && new_grid[i].length <= temp_grid[i].length){
